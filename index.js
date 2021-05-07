@@ -4,7 +4,6 @@ const port = process.env.PORT || 4001
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(require("./router/router"));
 
 app.get('/', (req, res) => res.send('default route'))
 
