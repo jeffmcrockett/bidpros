@@ -1,6 +1,4 @@
-const express = require('express');
-const router = express.Router();
-const controller = require("../controller/controller");
+const connection = require('../sql/connection');
 
 router.get('/users', controller.getUsers);
 
@@ -65,7 +63,7 @@ let updateItem = (req, res) => {
     res.send("success")
 }
 
-let getAllItems = (req, res) => {
+let getAllItemsByEvent = (req, res) => {
     console.log("Inside the getAllItems function", req.params);
     connection.query(`SELECT * FROM items WHERE event_id = ${req.params.event_id}`, function (err, results) {
         if (err) {
@@ -78,9 +76,10 @@ let getAllItems = (req, res) => {
     res.send("success")
 }
 
-let getAllUsers = (req, res) => {
+let getAllUsersByEvent = (req, res) => {
     console.log("Inside the getAllUsers function", req.params);
-    connection.query(`SELECT * FROM users`, function (err, results) {
+    connection.query(`SELECT * FROM users
+    WHERE event_id`, function (err, results) {
         if (err) {
             console.log(`there is an error: ${err}`);
             res.status(500).send(`internal service error`)
@@ -156,4 +155,14 @@ let deleteItem = (req, res) => {
     res.send("success")
 }
 
-module.exports = router;
+module.exports = 
+    {createEvent,
+    createItem,
+    updateItem,
+    getAllItemsByEvent,
+    getAllUsersByEvent,
+    getAllEvents,
+    createUser,
+    updateUser,
+    deleteItem
+};

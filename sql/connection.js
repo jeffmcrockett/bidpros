@@ -1,6 +1,6 @@
-const psql = require('psql');
+const pg = require('pg');
 
-let connection = psql.createConnection({
+let connection = pg.createConnection({
   host: 'ec2-54-87-112-29.compute-1.amazonaws.com',
   user: 'mgujwfkuppyvbo',
   password: 'ab17a2b5b15b9e01fd17ea2e55062e19981f79f76152e482722750a0692d142c',
