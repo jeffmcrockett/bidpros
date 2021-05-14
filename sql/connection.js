@@ -1,4 +1,4 @@
-const mysql = require('psql');
+const psql = require('psql');
 
 let connection = psql.createConnection({
   host: 'ec2-54-87-112-29.compute-1.amazonaws.com',
