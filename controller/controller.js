@@ -3,10 +3,10 @@ const connection = require('../sql/connection');
 let createEvent = (req, res) => {
     console.log("Inside the createEvent function", req.params);
     connection.query(`INSERT INTO events (event_id, event_name, event_host, event_date)
-    VALUES(${req.params.event_id},
-        ${req.params.event_name},
-        ${req.params.event_host},
-        ${req.params.event_date})`,
+    VALUES(${req.body.event_id},
+        ${req.body.event_name},
+        ${req.body.event_host},
+        ${req.body.event_date})`,
         function (err, results) {
             if (err) {
                 console.log(`there is an error: ${err}`);
@@ -15,7 +15,6 @@ let createEvent = (req, res) => {
                 res.json(results)
             }
         });
-    res.send("success")
 }
 
 let createItem = (req, res) => {
@@ -36,7 +35,6 @@ let createItem = (req, res) => {
             res.json(results)
         }
     });
-    res.send("success")
 }
 
 let updateItem = (req, res) => {
@@ -58,7 +56,6 @@ let updateItem = (req, res) => {
                 res.json(results)
             }
         });
-    res.send("success")
 }
 
 let getAllItemsByEvent = (req, res) => {
@@ -71,7 +68,6 @@ let getAllItemsByEvent = (req, res) => {
             res.json(results)
         }
     });
-    res.send("success")
 }
 
 let getAllUsersByEvent = (req, res) => {
@@ -97,7 +93,6 @@ let getAllEvents = (req, res) => {
             res.json(results)
         }
     });
-    res.send("success")
 }
 
 let createUser = (req, res) => {
@@ -116,7 +111,6 @@ let createUser = (req, res) => {
                 res.json(results)
             }
         });
-    res.send("success")
 }
 
 let updateUser = (req, res) => {
@@ -136,7 +130,6 @@ let updateUser = (req, res) => {
                 res.json(results)
             }
         });
-    res.send("success")
 }
 
 let deleteItem = (req, res) => {
@@ -149,7 +142,6 @@ let deleteItem = (req, res) => {
             res.json(results)
         }
     });
-    res.send("success")
 }
 
 module.exports = 
