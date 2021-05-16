@@ -1,7 +1,5 @@
 const connection = require('../sql/connection');
 
-router.get('/users', controller.getUsers);
-
 let createEvent = (req, res) => {
     console.log("Inside the createEvent function", req.params);
     connection.query(`INSERT INTO events (event_id, event_name, event_host, event_date)
@@ -21,9 +19,9 @@ let createEvent = (req, res) => {
 }
 
 let createItem = (req, res) => {
-    console.log("Inside the createItem function", req.params);
-    connection.query(`INSERT INTO items (item_id, item_name, item_desc, item_open, item_donor, event_id, bid_id)
-    VALUES (${req.params.item_id}, 
+    console.log("Inside the createItem function", req.body);
+    connection.query(`INSERT INTO items (item_name, item_desc, item_open, item_donor, event_id, bid_id)
+    VALUES ( 
         ${req.params.item_name}, 
         ${req.params.item_desc},
         ${req.params.item_open},
@@ -44,13 +42,13 @@ let createItem = (req, res) => {
 let updateItem = (req, res) => {
     console.log("Inside the updateItem function", req.params);
     connection.query(`UPDATE items
-    SET (item_id = ${req.params.item_id}, 
+    SET item_id = ${req.params.item_id}, 
         item_name = ${req.params.item_name}, 
         item_desc = ${req.params.item_desc},
         item_open = ${req.params.item_open},
         item_donor = ${req.params.item.donor},
         event_id = ${req.params.event_id},
-        bid_id = ${req.params.bid_id}) 
+        bid_id = ${req.params.bid_id} 
         WHERE item_id = ${req.params.item_id};`,
         function (err, results) {
             if (err) {
@@ -78,16 +76,15 @@ let getAllItemsByEvent = (req, res) => {
 
 let getAllUsersByEvent = (req, res) => {
     console.log("Inside the getAllUsers function", req.params);
-    connection.query(`SELECT * FROM users
-    WHERE event_id`, function (err, results) {
+    connection.query(`SELECT * FROM users JOIN usertype ON users.user_id = usertype.user_id
+    WHERE usertype.event_id = ${req.params.event_id}`, function (err, results) {
         if (err) {
-            console.log(`there is an error: ${err}`);
+            console.log(`there is an error`, err);
             res.status(500).send(`internal service error`)
         } else {
-            res.json(results)
+            res.json(results.rows)
         }
     });
-    res.send("success")
 }
 
 let getAllEvents = (req, res) => {
