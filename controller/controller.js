@@ -1,5 +1,6 @@
 const connection = require('../sql/connection');
 
+// ! Incomplete
 let createEvent = (req, res) => {
     console.log("Inside the createEvent function", req.params);
     connection.query(`INSERT INTO events (event_id, event_name, event_host, event_date)
@@ -17,16 +18,17 @@ let createEvent = (req, res) => {
         });
 }
 
+// ! Incomplete
 let createItem = (req, res) => {
     console.log("Inside the createItem function", req.body);
     connection.query(`INSERT INTO items (item_name, item_desc, item_open, item_donor, event_id, bid_id)
     VALUES ( 
-        ${req.params.item_name}, 
-        ${req.params.item_desc},
-        ${req.params.item_open},
-        ${req.params.item.donor},
-        ${req.params.event_id},
-        ${req.params.bid_id}
+        ${req.body.item_name}, 
+        ${req.body.item_desc},
+        ${req.body.item_open},
+        ${req.body.item.donor},
+        ${req.body.event_id},
+        ${req.body.bid_id}
         )`, function (err, results) {
         if (err) {
             console.log(`there is an error: ${err}`);
@@ -37,17 +39,18 @@ let createItem = (req, res) => {
     });
 }
 
+// ! Incomplete
 let updateItem = (req, res) => {
     console.log("Inside the updateItem function", req.params);
     connection.query(`UPDATE items
-    SET item_id = ${req.params.item_id}, 
-        item_name = ${req.params.item_name}, 
-        item_desc = ${req.params.item_desc},
-        item_open = ${req.params.item_open},
-        item_donor = ${req.params.item.donor},
-        event_id = ${req.params.event_id},
-        bid_id = ${req.params.bid_id} 
-        WHERE item_id = ${req.params.item_id};`,
+    SET item_id = ${req.body.item_id}, 
+        item_name = ${req.body.item_name}, 
+        item_desc = ${req.body.item_desc},
+        item_open = ${req.body.item_open},
+        item_donor = ${req.body.item.donor},
+        event_id = ${req.body.event_id},
+        bid_id = ${req.body.bid_id} 
+        WHERE item_id = ${req.body.item_id};`,
         function (err, results) {
             if (err) {
                 console.log(`there is an error: ${err}`);
@@ -58,9 +61,10 @@ let updateItem = (req, res) => {
         });
 }
 
+// ! Incomplete
 let getAllItemsByEvent = (req, res) => {
     console.log("Inside the getAllItems function", req.params);
-    connection.query(`SELECT * FROM items WHERE event_id = ${req.params.event_id}`, function (err, results) {
+    connection.query(`SELECT * FROM items WHERE event_id = ${req.body.event_id}`, function (err, results) {
         if (err) {
             console.log(`there is an error: ${err}`);
             res.status(500).send(`internal service error`)
@@ -70,10 +74,11 @@ let getAllItemsByEvent = (req, res) => {
     });
 }
 
+// ! This is the corrected version to model other after
 let getAllUsersByEvent = (req, res) => {
     console.log("Inside the getAllUsers function", req.params);
     connection.query(`SELECT * FROM users JOIN usertype ON users.user_id = usertype.user_id
-    WHERE usertype.event_id = ${req.params.event_id}`, function (err, results) {
+    WHERE usertype.event_id = ${req.body.event_id}`, function (err, results) {
         if (err) {
             console.log(`there is an error`, err);
             res.status(500).send(`internal service error`)
@@ -83,6 +88,7 @@ let getAllUsersByEvent = (req, res) => {
     });
 }
 
+// ! Incomplete
 let getAllEvents = (req, res) => {
     console.log("Inside the getAllEvents function", req.params);
     connection.query(`SELECT * FROM events`, function (err, results) {
@@ -95,14 +101,15 @@ let getAllEvents = (req, res) => {
     });
 }
 
+// ! Incomplete
 let createUser = (req, res) => {
     console.log("Inside the createUser function", req.params);
     connection.query(`INSERT INTO users (user_id, first_name, last_name, city, email)
-        VALUES (${req.params.user_id}, 
-            ${req.params.first_name}, 
-            ${req.params.last_name}, 
-            ${req.params.city}, 
-            ${req.params.email})`,
+        VALUES (${req.body.user_id}, 
+            ${req.body.first_name}, 
+            ${req.body.last_name}, 
+            ${req.body.city}, 
+            ${req.body.email})`,
         function (err, results) {
             if (err) {
                 console.log(`there is an error: ${err}`);
@@ -113,15 +120,16 @@ let createUser = (req, res) => {
         });
 }
 
+// ! Incomplete
 let updateUser = (req, res) => {
     console.log("Inside the updateUser function", req.params);
     connection.query(`UPDATE users
-        SET user_id = ${req.params.user_id}, 
-        first_name = ${req.params.first_name}, 
-        last name = ${req.params.last_name}, 
-        city = ${req.params.city}, 
-        email = ${req.params.email})
-        WHERE user_id = ${req.params.user_id};`,
+        SET user_id = ${req.body.user_id}, 
+        first_name = ${req.body.first_name}, 
+        last name = ${req.body.last_name}, 
+        city = ${req.body.city}, 
+        email = ${req.body.email})
+        WHERE user_id = ${req.body.user_id};`,
         function (err, results) {
             if (err) {
                 console.log(`there is an error: ${err}`);
@@ -132,9 +140,10 @@ let updateUser = (req, res) => {
         });
 }
 
+// ! Incomplete
 let deleteItem = (req, res) => {
     console.log("Inside the createEvent function", req.params);
-    connection.query('INSERT INTO events', function (err, results) {
+    connection.query(`DELETE FROM events where event_id = ${event_id}`, function (err, results) {
         if (err) {
             console.log(`there is an error: ${err}`);
             res.status(500).send(`internal service error`)

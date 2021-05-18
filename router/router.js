@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require("../controller/controller.js")
 
-router.post("/events", controller.createEvent);
+router.post("/events/:event_id, events/", controller.createEvent);
 
 router.post("/items", controller.createItem);
 
