@@ -105,7 +105,7 @@ let getAllEvents = (req, res) => {
 let createUser = (req, res) => {
     console.log("Inside the createUser function", req.params);
     connection.query(`INSERT INTO users (user_id, first_name, last_name, city, email)
-        VALUES (${req.body.user_id}, 
+        VALUES {( 
             ${req.body.first_name}, 
             ${req.body.last_name}, 
             ${req.body.city}, 
