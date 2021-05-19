@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const controller = require("../controller/controller.js")
+const authenticate = require("../authenticate/authenticate.js")
 
-router.post("/events/:event_id, events/", controller.createEvent);
+router.post("/createEvent", authenticate.checkJwt, controller.createEvent);
 
-router.post("/items/:item_name, /items/:desc, /items/:item_desc, /items/:item_open, /items/:item_donor, /items/:event_id, /items/:bid_id", controller.createItem);
+router.post('/createItem', authenticate.checkJwt, controller.createItem);
 
-router.put("/items/:item_name, /items/:desc, /items/:item_desc, /items/:item_open, /items/:item_donor, /items/:event_id, /items/:bid_id", controller.updateItem);
+router.put('/updateItem/:item_id', authenticate.checkJwt, controller.updateItem);
 
-router.get("/events/:event_id/items", controller.getAllItemsByEvent);
+router.get("/events/:event_id/items", authenticate.checkJwt, controller.getAllItemsByEvent);
 
-router.get("/events/:event_id/users", controller.getAllUsersByEvent);
+router.get("/events/:event_id/users", authenticate.checkJwt, controller.getAllUsersByEvent);
 
-router.get("/events", controller.getAllEvents);
+router.get("/events", authenticate.checkJwt, controller.getAllEvents);
 
-router.post("/users/:first_name, /users/:last_name, /users/:city, /users/:email", controller.createUser);
+router.post('/createUser', authenticate.checkJwt, controller.createUser);
 
-router.put("/users/:first_name, /users/:last_name, /users/:city, /users/:email", controller.updateUser);
+router.put('/updateUser/users/:user_id', authenticate.checkJwt, controller.updateUser);
 
-router.delete("/items/:item_num", controller.deleteItem);
+router.delete('/delete/items/:item_id', authenticate.checkJwt, controller.deleteItem);
 
 module.exports = router;

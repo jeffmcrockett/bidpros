@@ -1,12 +1,12 @@
 const { Client } = require('pg');
 
 const client = new Client({
-    user: 'mgujwfkuppyvbo',
-    host: 'ec2-54-87-112-29.compute-1.amazonaws.com',
-    database: 'd701ft5q0sf4mu',
-    password: 'ab17a2b5b15b9e01fd17ea2e55062e19981f79f76152e482722750a0692d142c',
-    port: 5432,
-    ssl: {rejectUnauthorized:false}
+    user: process.env.MYSQL_USER,
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DB,
+    password: process.env.MYSQL_PASSWORD,
+    port: process.env.MYSQL_PORT,
+    ssl: process.env.MYSQL_SSL
 });
 
 client.connect(function(err) {
