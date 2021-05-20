@@ -217,8 +217,8 @@ let deleteItem = (req, res) => {
     });
 }
 
-module.exports = 
-    {createEvent,
+module.exports = {
+    createEvent,
     createItem,
     updateItem,
     getAllItemsByEvent,
