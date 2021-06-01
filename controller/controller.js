@@ -1,5 +1,7 @@
 const connection = require('../sql/connection.js');
 
+console.log(`connected as ${connection}`);
+
 // createEvent complete, NOT TESTED
 let createEvent = (req, res) => {
     console.log("Inside the createEvent function", req.params);

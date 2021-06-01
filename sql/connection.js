@@ -14,7 +14,7 @@ client.connect(function(err) {
     console.log('error connecting : ' + err.stack);
     return;
   };
-  console.log('connected as id ', client)
+  console.log('connected as id ', client.processID)
 });
 
 module.exports = client;

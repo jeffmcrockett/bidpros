@@ -14,7 +14,7 @@ router.get("/events/:event_id/items", authenticate.checkJwt, controller.getAllIt
 
 router.get("/events/:event_id/users", authenticate.checkJwt, controller.getAllUsersByEvent);
 
-router.get("/events", authenticate.checkJwt, controller.getAllEvents);
+router.get("/events", controller.getAllEvents);
 
 router.post('/createUser', authenticate.checkJwt, controller.createUser);
 
