@@ -134,7 +134,7 @@ let getAllUsersByEvent = (req, res) => {
 // getAllEvents complete, NOT TESTED
 let getAllEvents = (req, res) => {
     console.log("Inside the getAllEvents function", req.params);
-    connection.query(`SELECT * FROM events`, function (err, results) {
+    connection.query(`SELECT * FROM "bidpros"."events";`, function (err, results) {
         if (err) {
             console.log(`there is an error: ${err}`);
             res.status(500).send(`internal service error`)
