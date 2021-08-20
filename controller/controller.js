@@ -1,7 +1,5 @@
 const connection = require('../sql/connection.js');
 
-console.log(`connected as ${connection}`);
-
 // createEvent complete, NOT TESTED
 let createEvent = (req, res) => {
     console.log("Inside the createEvent function", req.params);
@@ -132,16 +130,14 @@ let getAllUsersByEvent = (req, res) => {
 }
 
 // getAllEvents complete, NOT TESTED
-let getAllEvents = (req, res) => {
+let getAllEvents = async (req, res) => {
     console.log("Inside the getAllEvents function", req.params);
-    connection.query(`SELECT * FROM "bidpros"."events";`, function (err, results) {
-        if (err) {
-            console.log(`there is an error: ${err}`);
-            res.status(500).send(`internal service error`)
-        } else {
-            res.json(results)
-        }
-    });
+    try {
+        
+    } catch (error) {
+        
+    }
+    post.save()
 }
 
 // createUser complete, NOT TESTED
@@ -230,3 +226,23 @@ module.exports = {
     updateUser,
     deleteItem
 };
+
+
+
+
+
+
+// router.get('/', auth, async (req, res) => {
+//     try {
+//        const posts = await Post.find().sort({ date: -1})
+//        res.json(posts)
+//     } catch (error) {
+//         console.error(err.message)
+//         res.status(500).send('Server Error')
+        
+//     }
+// })
+
+// const express = require('express')
+// const router =express.Router()
+// const { check, validationResult} = require('express-validator')
