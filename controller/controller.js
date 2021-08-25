@@ -1,6 +1,9 @@
 const { default: axios } = require('axios');
 const { post } = require('../router/router.js');
 const connection = require('../sql/connection.js');
+const User = require("../schemas/users");
+const Event = require("../schemas/events");
+const Item = require("../schemas/users");
 
 // createEvent complete, NOT TESTED
 let createEvent = (req, res) => {
@@ -100,6 +103,7 @@ let updateItem = (req, res) => {
 
 // getAllItemsByEvent complete, NOT TESTED
 let getAllItemsByEvent = async (req, res) => {
+    console.log("Inside the getAllItemsByEvent function", req.params)
     try { axios.get()
         .then((response) => {
             const data = response.data;
@@ -108,7 +112,7 @@ let getAllItemsByEvent = async (req, res) => {
         })
     }
     catch (error) {
-        
+        console.log("Error", error);
     }
     post.save()
 
@@ -154,17 +158,18 @@ let getAllUsersByEvent = (req, res) => {
 // getAllEvents complete, NOT TESTED
 let getAllEvents = async (req, res) => {
     console.log("Inside the getAllEvents function", req.params);
-    try {
-        
-    } catch (error) {
-        
+    try { let events = Event.map(event => event);
+        res.json(events);
     }
-    post.save()
+    catch (error) {
+        console.log("There was an error", error)
+        res.status(400)
+    }
 }
 
 // createUser complete, NOT TESTED
 let createUser = (req, res) => {
-
+//
 
     // console.log("Inside the createUser function", req.params);
 
@@ -274,3 +279,8 @@ module.exports = {
 // const express = require('express')
 // const router =express.Router()
 // const { check, validationResult} = require('express-validator')
+
+
+
+
+

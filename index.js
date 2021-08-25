@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const path = require('path');
-const db = require('./config/db');
-const collection = "_______"
+// const path = require('path');
+// const db = require('./config/db');
+// const collection = "_______"
 // const { logger } = require('./authenticate/authenticate.js');
 const router = require('./router/router.js');
 
@@ -22,3 +22,5 @@ app.get('/', (req, res) => res.send('default route'));
 app.listen(port, () => {
   console.log('app is listening on:', port)
 });
+
+
